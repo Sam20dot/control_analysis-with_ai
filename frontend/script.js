@@ -2,9 +2,9 @@ const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("msg");
 const ctx = document.getElementById("dataChart").getContext("2d");
 
-/* =======================
-   Chart Initialization
-======================= */
+
+   //Chart Initialization for making the new chart
+
 const dataChart = new Chart(ctx, {
   type: "line",
   data: {
@@ -25,9 +25,9 @@ const dataChart = new Chart(ctx, {
   }
 });
 
-/* =======================
-   UI Helpers
-======================= */
+
+ //  UI Helpers which helps us to plot those informations on the screen 
+
 async function addMessage(html, type) {
   const div = document.createElement("div");
   div.className = "message " + type;
@@ -44,12 +44,13 @@ function handleKey(e) {
   if (e.key === "Enter") send();
 }
 
-/* =======================
-   Text Parsing for Plot
-======================= */
+
+  // Text Parsing for Plot
+
 function extractPlotFromText(text) {
   try {
-    // Extract Y values
+    // Extract Y values here we use what we call regurally expression which i have studied in the book which is called 
+     // eloquent javascripts 
     const yMatch = text.match(/temperature\s*=\s*\[([^\]]+)\]/i);
     if (!yMatch) return null;
     const y = yMatch[1].split(",").map(n => Number(n.trim()));
@@ -69,9 +70,9 @@ function extractPlotFromText(text) {
   }
 }
 
-/* =======================
-   Plot Function
-======================= */
+
+  // Plot Function
+
 function plotXY(plot) {
   if (!plot || !plot.y) return;
 
@@ -84,9 +85,9 @@ function plotXY(plot) {
   dataChart.update();
 }
 
-/* =======================
-   Main Send Function
-======================= */
+
+   //Main Send Function
+
 async function send() {
   const msg = input.value.trim();
   if (!msg) return;
